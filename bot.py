@@ -6,11 +6,10 @@ import time
 import os
 from json import loads
 
-twitch_Client_ID = 'i1fqy0yyibvumjfogef17mqfuebsja'
-twitch_Client_secret = '33836pkseoqqqx2wem7a933lzckbm4'
+twitch_Client_ID = os.environ['twitchcid']
+twitch_Client_secret = os.environ['twitchcsecret']
 discord_Token = os.environ['token']
-discord_channelID = 825793305983582298
-# discord_channelID = 505258184634531847
+discord_channelID = os.environ['channel']
 discord_bot_state = ''
 twitchID = 'tattoob0y'
 # twitchID = 'screamdaddy93'
@@ -68,6 +67,6 @@ async def on_ready():
             # await client.wait_until_ready()
             print("Offline")
 
-        await asyncio.sleep(60)
+        await asyncio.sleep(120)
 
 client.run(discord_Token)
