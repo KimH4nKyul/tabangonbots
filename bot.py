@@ -66,7 +66,7 @@ async def on_ready():
             await channel.send(msg)
             # await client.wait_until_ready()
             print("Offline")
-            time.sleep(3480)
+            time.sleep(3600) # 1hours 
 
         await asyncio.sleep(120)
 
