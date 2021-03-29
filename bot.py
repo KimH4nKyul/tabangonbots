@@ -29,7 +29,7 @@ async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=game)
 
     # 채팅 채널 설정
-    channel = client.get_channel(discord_channelID)
+    channel = client.get_channel(int(discord_channelID))
     await client.wait_until_ready()
     print(channel)
 
