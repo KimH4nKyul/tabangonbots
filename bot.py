@@ -55,8 +55,8 @@ async def on_ready():
         try:
             if loads(response_channel.text)['data'][0]['type'] == 'live' and check == False:
                 # await client.wait_until_ready()
-                msg = time.strftime('%Y%m%d', time.localtime(
-                    time.time())) + ' 타뱅온! 방송보러가기 : https://www.twitch.tv/' + twitchID
+                msg = time.strftime('%Y-%m-%d', time.localtime(
+                    time.time())) + '\n타뱅온! 방송보러가기 : https://www.twitch.tv/' + twitchID
                 await channel.send(msg)
                 print("Online")
                 check = True
