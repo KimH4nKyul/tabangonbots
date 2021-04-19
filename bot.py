@@ -18,6 +18,7 @@ twitchID = 'tattoob0y'
 msg = ''
 
 client = discord.Client()
+bot = commands.Bot(command_prefix='!tabo')
 
 
 @client.event
@@ -71,5 +72,10 @@ async def on_ready():
             # time.sleep(3600) # 1hours
 
         await asyncio.sleep(120)
+
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send("hi!")
 
 client.run(discord_Token)
