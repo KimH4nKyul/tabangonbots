@@ -18,23 +18,6 @@ twitchID = 'tattoob0y'
 msg = ''
 
 client = discord.Client()
-cmd = commands.Bot(command_prefix='!타봇 ')
-
-
-@cmd.command(aliases=['안녕', 'ㅎㅇ', '타하'])
-async def hello(ctx):
-    await ctx.send("Hello! My name is TattooBot.")
-
-
-@client.event
-async def on_command_error(ctx, error):
-    tb = traceback.format_exception(type(error), error, error.__traceback__)
-    err = [line.rstrip()for line in tb]
-    errstr = '\n'.join(err)
-    if isinstance(error, commands.NotOwner):
-        await ctx.send('주인님이랑만 낑낑 해요')
-    else:
-        print(errstr)
 
 
 @client.event
