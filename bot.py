@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import discord
+from discord.ext import commands
+# import traceback
 import requests
 import asyncio
 import time
@@ -15,7 +17,14 @@ twitchID = 'tattoob0y'
 # twitchID = 'screamdaddy93'
 msg = ''
 
-client = discord.Client()
+# client = discord.Client()
+client = commands.Bot(command_prefix='!타봇 ', help_command=None)
+
+
+@client.command(name='안녕')
+async def hello(ctx):
+
+    await ctx.send("안녕하세요? 타뱅온봇입니다. 현재는 개발중으로, 명령어가 없습니다. 기능 문의는 스크림아빠를 찾아주세요!")
 
 
 @client.event
