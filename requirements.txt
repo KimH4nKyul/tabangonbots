@@ -1,5 +1,4 @@
 discord.py
 asyncio
 requests
-traceback
 discord.ext
