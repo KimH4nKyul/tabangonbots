@@ -71,8 +71,8 @@ async def on_ready():
                 check = True
         except:
             check = False
-            msg = '현재는 방송 중이 아닙니다! '
-            await channel.send(msg)
+            # msg = '현재는 방송 중이 아닙니다! '
+            # await channel.send(msg)
             # await client.wait_until_ready()
             print("Offline")
             # time.sleep(3600) # 1hours
