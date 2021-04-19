@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import traceback
 import discord
 from discord.ext import commands
 import requests
@@ -14,15 +15,26 @@ discord_channelID = os.environ['channel']
 discord_bot_state = ''
 twitchID = 'tattoob0y'
 # twitchID = 'screamdaddy93'
-msg = '명령어 !타봇 <commands>'
+msg = ''
 
 client = discord.Client()
-cmd = commands.Bot(command_prefix='!')
+cmd = commands.Bot(command_prefix='!타봇 ')
 
 
-@cmd.command(name='타봇')
-async def test(ctx, msg):
-    await ctx.send({msg})
+@cmd.command(aliases=['안녕', 'ㅎㅇ', '타하'])
+async def hello(ctx):
+    await ctx.send("Hello! My name is TattooBot.")
+
+
+@client.event
+async def on_command_error(ctx, error):
+    tb = traceback.format_exception(type(error), error, error.__traceback__)
+    err = [line.rstrip()for line in tb]
+    errstr = '\n'.join(err)
+    if isinstance(error, commands.NotOwner):
+        await ctx.send('주인님이랑만 낑낑 해요')
+    else:
+        print(errstr)
 
 
 @client.event
