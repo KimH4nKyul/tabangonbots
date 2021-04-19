@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import discord
+from discord.ext import commands
 import requests
 import asyncio
 import time
@@ -13,9 +14,15 @@ discord_channelID = os.environ['channel']
 discord_bot_state = ''
 twitchID = 'tattoob0y'
 # twitchID = 'screamdaddy93'
-msg = ''
+msg = '명령어 !타봇 <commands>'
 
 client = discord.Client()
+cmd = commands.Bot(command_prefix='!타봇')
+
+
+@cmd.command(name='test')
+async def test(ctx):
+    await ctx.send('test123')
 
 
 @client.event
@@ -66,7 +73,7 @@ async def on_ready():
             # await channel.send(msg)
             # await client.wait_until_ready()
             print("Offline")
-            # time.sleep(3600) # 1hours 
+            # time.sleep(3600) # 1hours
 
         await asyncio.sleep(120)
 
