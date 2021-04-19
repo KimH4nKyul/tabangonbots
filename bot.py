@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-import traceback
 import discord
-from discord.ext import commands
 import requests
 import asyncio
 import time
