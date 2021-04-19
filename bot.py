@@ -17,12 +17,12 @@ twitchID = 'tattoob0y'
 msg = '명령어 !타봇 <commands>'
 
 client = discord.Client()
-cmd = commands.Bot(command_prefix='!타봇')
+cmd = commands.Bot(command_prefix='!')
 
 
-@cmd.command(name='test')
-async def test(ctx):
-    await ctx.send('test123')
+@cmd.command(name='타봇')
+async def test(ctx, msg):
+    await ctx.send({msg})
 
 
 @client.event
