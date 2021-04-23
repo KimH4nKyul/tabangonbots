@@ -2,17 +2,18 @@
 import discord
 from discord.ext import commands
 # import traceback
-from random import choice
 import requests
 import asyncio
 import time
 import os
 from json import loads
 
-twitch_Client_ID = os.environ['twitchcid']
-twitch_Client_secret = os.environ['twitchcsecret']
-discord_Token = os.environ['token']
-discord_channelID = os.environ['channel']
+twitch_Client_ID = 'i1fqy0yyibvumjfogef17mqfuebsja'  # os.environ['twitchcid']
+# os.environ['twitchcsecret']
+twitch_Client_secret = '33836pkseoqqqx2wem7a933lzckbm4'
+discord_Token = 'ODI1NDQ5MzA4Nzg1NzM3Nzk4.YF-Fkw.DIAetPjcLSBsXMRPo2GwFZ6MCH0'
+# os.environ['token']
+discord_channelID = 825793305983582298  # os.environ['channel']
 discord_bot_state = '티배깅 존나'
 twitchID = 'tattoob0y'
 # twitchID = 'screamdaddy93'
@@ -21,20 +22,47 @@ msg = ''
 # client = discord.Client()
 client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 
+for filename in os.listdir("Cogs"):
+    if filename.endswith(".py"):
+        client.load_extension(f'Cogs.{filename[:-3]}')
 
-@client.command(name='안녕')
-async def hello(ctx):
 
-    cmt = ["싸대기 탁! 야추 탁! 야꼭지 탁!", "응 싸대기 쳐맞어 그냥 쳐맞어 존나 쳐맞어"]
+@client.command(name="리로드")
+async def reload_commands(ctx, extension=None):
+    if extension is None:
+        for filename in os.listdir("Cogs"):
+            if filename.endswith(".py"):
+                try:
+                    client.unload_extension(f"Cogs.{filename[:-3]}")
+                    client.load_extension(f"Cogs.{filename[:-3]}")
+                    await ctx.send(":white_check_mark: 모든 명령어를 다시 불러왔습니다.")
+                except Exception as e:
+                    fmt = f"{type(e).__name__}: {e}"
+                    print("\nReload Error: \n", fmt)
+    else:
+        client.unload_extension(f"Cogs.{extension}")
+        client.load_extension(f"Cogs.{extension}")
+        await ctx.send(f":white_check_mark: {extension}을(를) 다시 불러왔습니다.")
 
-    await ctx.send(choice(cmt))
+
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("그딴 명령어는 없네요 ㅖ~")
+        return
+    elif isinstance(error, commands.MissingRequiredArgument) or isinstance(error, commands.BadArgument):
+        await ctx.send("그딴 명령어는 못써요 ㅖ~")
+    else:
+        embed = discord.Embed(
+            title="Error", description="Reporting error", color=0xFF0000)
+        embed.add_field(name="상세", value=f"```{error}```")
+        await ctx.send(embed=embed)
 
 
 @client.event
 async def on_ready():
 
-    print(client.user.id)
-    print("ready")
+    print("ready: \n", client.user.name, client.user.id)
 
     # 디스코드 봇 상태 설정
     game = discord.Game(discord_bot_state)
