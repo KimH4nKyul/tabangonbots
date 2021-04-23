@@ -8,10 +8,10 @@ import time
 import os
 from json import loads
 
-twitch_Client_ID = os.environ['twitchcid']
-twitch_Client_secret = os.environ['twitchcsecret']
-discord_Token = os.environ['token']
-discord_channelID = os.environ['channel']
+twitch_Client_ID = os.environ.get('twitchid')
+twitch_Client_secret = os.environ.get('twitchsecret')
+discord_Token = os.environ.get('token')
+discord_channelID = os.environ.get('channel')
 discord_bot_state = '티배깅 존나'
 twitchID = 'tattoob0y'
 # twitchID = 'screamdaddy93'
@@ -20,9 +20,13 @@ msg = ''
 # client = discord.Client()
 client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 
-for filename in os.listdir("Cogs"):
-    if filename.endswith(".py"):
-        client.load_extension(f'Cogs.{filename[:-3]}')
+try:
+    for filename in os.listdir("Cogs"):
+        if filename.endswith(".py"):
+            client.load_extension(f'Cogs.{filename[:-3]}')
+except Exception as e:
+    fmt = f"{type(e).__name__}: {e}"
+    print("\nReload Error: \n", fmt)
 
 
 @client.command(name="리로드")
