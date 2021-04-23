@@ -23,7 +23,6 @@ client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 
 @client.command(name='안녕')
 async def hello(ctx):
-    ctx.message.author.id
 
     await ctx.send("싸대기 탁! 야추 탁! 야꼭지 탁!")
 
