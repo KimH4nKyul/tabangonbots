@@ -8,12 +8,10 @@ import time
 import os
 from json import loads
 
-twitch_Client_ID = 'i1fqy0yyibvumjfogef17mqfuebsja'  # os.environ['twitchcid']
-# os.environ['twitchcsecret']
-twitch_Client_secret = '33836pkseoqqqx2wem7a933lzckbm4'
-discord_Token = 'ODI1NDQ5MzA4Nzg1NzM3Nzk4.YF-Fkw.DIAetPjcLSBsXMRPo2GwFZ6MCH0'
-# os.environ['token']
-discord_channelID = 825793305983582298  # os.environ['channel']
+twitch_Client_ID = os.environ['twitchcid']
+twitch_Client_secret = os.environ['twitchcsecret']
+discord_Token = os.environ['token']
+discord_channelID = os.environ['channel']
 discord_bot_state = '티배깅 존나'
 twitchID = 'tattoob0y'
 # twitchID = 'screamdaddy93'
