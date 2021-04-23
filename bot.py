@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 # import traceback
+from random import choice
 import requests
 import asyncio
 import time
@@ -24,7 +25,9 @@ client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 @client.command(name='안녕')
 async def hello(ctx):
 
-    await ctx.send("응 싸대기 쳐맞어 그냥 쳐맞어 존나 쳐맞어")
+    cmt = ["싸대기 탁! 야추 탁! 야꼭지 탁!", "응 싸대기 쳐맞어 그냥 쳐맞어 존나 쳐맞어"]
+
+    await ctx.send(choice(cmt))
 
 
 @client.event
