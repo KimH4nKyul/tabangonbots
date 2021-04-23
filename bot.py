@@ -25,7 +25,7 @@ client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 async def hello(ctx):
     ctx.message.author.id
 
-    await ctx.send("안녕하세요? 타뱅온봇입니다. 현재는 개발중으로, 명령어가 없습니다. 기능 문의는 스크림아빠를 찾아주세요!")
+    await ctx.send("싸대기 탁! 야추 탁! 야꼭지 탁!")
 
 
 @client.event
