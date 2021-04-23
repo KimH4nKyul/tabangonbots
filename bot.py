@@ -24,7 +24,7 @@ client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 @client.command(name='안녕')
 async def hello(ctx):
 
-    await ctx.send("싸대기 탁! 야추 탁! 야꼭지 탁!")
+    await ctx.send("응 싸대기 쳐맞어 그냥 쳐맞어 존나 쳐맞어")
 
 
 @client.event
