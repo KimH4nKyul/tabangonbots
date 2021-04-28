@@ -42,9 +42,13 @@ async def reload_commands(ctx, extension=None):
                     fmt = f"{type(e).__name__}: {e}"
                     print("\nReload Error: \n", fmt)
     else:
-        client.unload_extension(f"Cogs.{extension}")
-        client.load_extension(f"Cogs.{extension}")
-        await ctx.send(f":white_check_mark: {extension}을(를) 다시 불러왔습니다.")
+        try:
+            client.unload_extension(f"Cogs.{extension}")
+            client.load_extension(f"Cogs.{extension}")
+            await ctx.send(f":white_check_mark: {extension}을(를) 다시 불러왔습니다.")
+        except Exception as e:
+            fmt = f"{type(e).__name__}: {e}"
+            print("\nReload Error: \n", fmt)
 
 
 @client.event
