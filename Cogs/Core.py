@@ -3,7 +3,7 @@ from discord.ext import commands
 from random import choice
 
 
-cog_list = ['기본']
+cog_list = ['기본', '유틸']
 
 
 class Core(commands.Cog, name='기본'):
@@ -56,17 +56,17 @@ class Core(commands.Cog, name='기본'):
                         else:
                             command_notfound = True
 
-                if command_notfound:
-                    if func in cog_list:  # 만약 cog_list에 func가 존재한다면
-                        cog_data = self.client.get_cog(func)  # cog 데이터 구하기
-                        command_list = cog_data.get_commands()  # 명령어 리스트 구하기
-                        embed = discord.Embed(
-                            title=f"카테고리 : {cog_data.qualified_name}", description=cog_data.description)  # 카테고리 이름과 설명 추가
-                        embed.add_field(name="명령어들", value=", ".join(
-                            [c.name for c in command_list]))  # 명령어 리스트 join
-                        await ctx.send(embed=embed)  # 보내기
-                    else:
-                        await ctx.send("없어")
+            if command_notfound:
+                if func in cog_list:  # 만약 cog_list에 func가 존재한다면
+                    cog_data = self.client.get_cog(func)  # cog 데이터 구하기
+                    command_list = cog_data.get_commands()  # 명령어 리스트 구하기
+                    embed = discord.Embed(
+                        title=f"카테고리 : {cog_data.qualified_name}", description=cog_data.description)  # 카테고리 이름과 설명 추가
+                    embed.add_field(name="명령어들", value=", ".join(
+                        [c.name for c in command_list]))  # 명령어 리스트 join
+                    await ctx.send(embed=embed)  # 보내기
+                else:
+                    await ctx.send("없어")
 
 
 def setup(client):
