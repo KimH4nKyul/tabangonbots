@@ -18,12 +18,10 @@ class Utils(commands.Cog, name='유틸'):
                         'zh-TW', 'es', 'fr', 'vi', 'th', 'id']
 
         res: str = ''
-        try:
-            if v in my_lang:
-                res = support_lang[my_lang.index(v)]
-        except IndexError:
-            print("IndexError")
-            return
+        if v in my_lang:
+            res = support_lang[my_lang.index(v)]
+        else:
+            return IndexError
 
         return res
 
