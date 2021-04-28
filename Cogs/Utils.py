@@ -1,6 +1,4 @@
-from asyncio.windows_events import NULL
 import os
-import discord
 from discord.ext import commands
 import requests
 
@@ -10,28 +8,27 @@ class Utils(commands.Cog, name='유틸'):
     def __init__(self, client):
         self.client = client
 
-    def serchIndex(self, v: str):
+    def serchIndex(self, v: str) -> str:
 
-        my_lang = ['한국어', '영어', '참깨어',
-                   '대만어', '스페인어', '프랑스어', '베트남어', '태국어', '인도네시아어']
+        my_lang = ['한국어', '영어', '중국어',
+                   '대만어', '스페인어', '프랑스어', '베트남어', '태국어', '인도네시아어', '일본어']
         support_lang = ['ko', 'en', 'zh-CN',
-                        'zh-TW', 'es', 'fr', 'vi', 'th', 'id']
+                        'zh-TW', 'es', 'fr', 'vi', 'th', 'id', 'ja']
 
         res: str = ''
         if v in my_lang:
             res = support_lang[my_lang.index(v)]
-        else:
-            return IndexError
-
         return res
 
     @commands.command(name="번역", help="", usage="!타봇 번역 <기준어> <번역어> <문장>")
     async def Translate(self, ctx, src, dst, *msg):
 
         papago_client_id = os.environ.get('papagoid')
+        # papago_client_id = 'RVd7TKf_MwnlaBKg9zgq'
         papago_client_secret = os.environ.get('papagosecret')
+        # papago_client_secret = ''
 
-        text = ''
+        text: str = ''
         for x in msg:
             text = text + x + " "
         print(text)

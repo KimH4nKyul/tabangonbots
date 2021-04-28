@@ -62,7 +62,7 @@ async def on_command_error(ctx, error):
         embed = discord.Embed(
             title="Error", description="Reporting error", color=0xFF0000)
         embed.add_field(name="상세", value=f"```{error}```")
-        await ctx.send(embed=embed)
+        await ctx.send("잘못된 명령어 사용법입니다. \n", embed=embed)
 
 
 @client.event
