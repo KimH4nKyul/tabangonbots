@@ -49,8 +49,7 @@ class Utils(commands.Cog, name='유틸'):
             await ctx.send(res_body['message']['result']['translatedText'])
         else:
             await ctx.send("번역할 수 없습니다. ", res.status_code, " 에러 발생!")
-            # print(res.status_code)
-            return
+            print(res.status_code)
 
         res.close()
 
