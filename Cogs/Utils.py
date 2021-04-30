@@ -1,5 +1,6 @@
 import os
 from discord.ext import commands
+from urllib import parse
 import requests
 
 
@@ -14,7 +15,7 @@ class Utils(commands.Cog, name='유틸'):
         for x in v:
             text = text + x + " "
 
-        return text
+        return text[:-1]
 
     def serchIndex(self, v: str) -> str:
 
@@ -37,6 +38,7 @@ class Utils(commands.Cog, name='유틸'):
         # papago_client_secret = ''
 
         text = self.concatText(msg)
+        print(text)
         source = self.serchIndex(src)
         target = self.serchIndex(dst)
 
@@ -58,30 +60,36 @@ class Utils(commands.Cog, name='유틸'):
         res.close()
 
     @commands.command(name='카카오맵', help="카카오맵으로 장소 검색하기", usage="!타봇 카카오맵 <주소 | 건물명>")
-    async def KakaoMap(self, ctx, address):
+    async def KakaoMap(self, ctx, *address):
 
-        result = ""
+        print(address)
+        result = ''
         mAddress = self.concatText(address)
-        # print(mAddress)
+        mAddress = parse.quote(mAddress)
+        print("주소 확인:", mAddress, type(mAddress))
 
-        url = 'https://dapi.kakao.com/v2/local/search/address.json?query=' + mAddress
-        # print(url)
+        url = 'https://dapi.kakao.com/v2/local/search/address.json?analyze_type=similar&query=' + mAddress
+        print(url)
         rest_api_key = '79bc4f11c9ddec8d8297ebb85d84d18f'
-        header = {'Authorization': 'KakaoAK ' + rest_api_key}
+        header = {'Authorization': 'KakaoAK ' + rest_api_key,
+                  'Content-Type': 'application/x-www-form-urlencoded'}
 
         r = requests.get(url, headers=header)
-
-        # print(r.status_code) # 200
-
-        if r.status_code == 200:
-            result_address = r.json()["documents"][0]["address"]
-
-            result = result_address["y"], result_address["x"]
+        if len(r.json()["documents"]) < 1:
+            await ctx.send("\n검색 결과가 없습니다.\n")
         else:
-            result = "ERROR[" + str(r.status_code) + "]"
+            print("카카오맵 상태:", r.status_code)  # 200
 
-        print(mAddress+","+result[0]+","+result[1])
-        # await ctx.send("https://map.kakao.com/link/map/"+mAddress+","+result[0]+","+result[1])
+            if r.status_code == 200:
+                result_address = r.json()["documents"][0]["address"]
+                result = result_address["y"], result_address["x"]
+                #print(mAddress, result[0], result[1])
+
+            else:
+                result = "ERROR[" + str(r.status_code) + "]"
+                await ctx.send("\n잘못된 결과를 반환했어요. \n")
+
+            # await ctx.send("https://map.kakao.com/link/map/"+mAddress+","+result[0]+","+result[1])
 
     @commands.command(name='코인', help="코인 관련 정보를 크롤링해 보여줘요. ", usage="!타봇 코인 <유튜브 | 뉴스>")
     async def Coin(self, ctx):
