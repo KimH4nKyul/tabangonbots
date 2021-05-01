@@ -69,7 +69,7 @@ class Utils(commands.Cog, name='유틸'):
         print("주소 확인:", mAddress, type(mAddress))
 
         url = 'https://dapi.kakao.com/v2/local/search/address.json?analyze_type=similar&query=' + mAddress
-        print("호출 URL:", url)
+        print("최초 호출 URL:", url)
         rest_api_key = '79bc4f11c9ddec8d8297ebb85d84d18f'
         header = {'Authorization': 'KakaoAK ' + rest_api_key,
                   'Content-Type': 'application/x-www-form-urlencoded'}
@@ -79,15 +79,21 @@ class Utils(commands.Cog, name='유틸'):
 
         if r.status_code == 200:
             if len(r.json()["documents"]) < 1:
-                await ctx.send("\n주소 검색 결과가 없어요 ㅠㅠ! 건물명으로 검색해드릴게요~\n")
+                await ctx.send("\n주소 검색 결과가 없어요 ㅠㅠ! 키워드로 검색해드릴게요~\n")
                 url = 'https://dapi.kakao.com/v2/local/search/keyword.json?query=' + mAddress
                 r = requests.get(url, headers=header)
-                result_address = r.json()["documents"][0]["address"]
+                if len(r.json()["documents"]) < 1:
+                    print("---------------\nNO RESULT ERROR\n---------------")
+                    raise Exception
+                print("키워드 검색 결과:\n", r.text)
+                result_address = r.json()["documents"][0]
                 result = result_address["y"], result_address["x"]
-                await ctx.send("https://map.kakao.com/link/map/"+mAddress+","+result[0]+","+result[1])
+                msg = "상위 1개 결과만 노출 됩니다. 정확한 결과를 원하시면 구체적인 키워드와 함께 입력해주세요 ^_^!\n"
+                await ctx.send("\n" + msg + "https://map.kakao.com/link/map/"+mAddress+","+result[0]+","+result[1])
             else:
                 url = 'https://dapi.kakao.com/v2/local/search/address.json?query=' + mAddress
                 r = requests.get(url, headers=header)
+                print("주소 검색 결과:\n", r.text)
                 result_address = r.json()["documents"][0]["address"]
                 result = result_address["y"], result_address["x"]
                 await ctx.send("https://map.kakao.com/link/map/"+mAddress+","+result[0]+","+result[1])
