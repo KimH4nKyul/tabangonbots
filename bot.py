@@ -87,7 +87,7 @@ async def on_ready():
     authorization = token_type + access_token
     print(authorization)
 
-    """ check = False
+    check = False
 
     while client.is_ready:
         print("ready on Notification")
@@ -114,6 +114,6 @@ async def on_ready():
             print("Offline")
             # time.sleep(3600) # 1hours
 
-        await asyncio.sleep(120) """
+        await asyncio.sleep(120)
 
 client.run(discord_Token)
