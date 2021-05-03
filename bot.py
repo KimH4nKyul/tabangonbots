@@ -13,8 +13,8 @@ twitch_Client_secret = os.environ.get('twitchsecret')
 discord_Token = os.environ.get('token')
 discord_channelID = os.environ.get('channel')
 discord_bot_state = '티배깅 존나'
-#twitchID = 'tattoob0y'
-twitchID = 'hanseoryeong'
+twitchID = 'tattoob0y'
+# twitchID = 'hanseoryeong'
 msg = ''
 
 # client = discord.Client()
@@ -103,7 +103,7 @@ async def on_ready():
                 # await client.wait_until_ready()
                 msg = time.strftime('%Y-%m-%d', time.localtime(
                     time.time())) + '\n타뱅온! 방송보러가기 : https://www.twitch.tv/' + twitchID
-                await channel.send(loads(response_channel.text)['data'][0]['user_name'] + "님이 " + loads(response_channel.text)['data'][0]['title'] + "라는 제목으로 방송중!\n" + msg)
+                await channel.send(msg + "\n" + loads(response_channel.text)['data'][0]['user_name'] + "님이 " + loads(response_channel.text)['data'][0]['title'] + "라는 제목으로 방송중!\n")
                 print("Online")
                 check = True
         except:
