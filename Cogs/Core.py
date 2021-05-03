@@ -17,12 +17,6 @@ class Core(commands.Cog, name='기본'):
         cmt = ["싸대기 탁! 야추 탁! 야꼭지 탁!", "응 싸대기 쳐맞어 그냥 쳐맞어 존나 쳐맞어"]
         await ctx.send(f"{ctx.author.name}님 안녕하세요? " + choice(cmt))
 
-    @commands.command()
-    async def test(self, ctx):
-
-        print(dir(ctx.author))
-        print(ctx.author.id, ctx.author.name, ctx.author.nick)
-
     @commands.command(name='도움말', help="타봇 카테고리별 명령어 가이드를 보여줘요.", usage="!타봇 도움말 <command>")
     async def Help(self, ctx, func=None):
 
