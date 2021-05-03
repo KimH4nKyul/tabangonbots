@@ -3,6 +3,7 @@ from discord.ext import commands
 from urllib import parse
 import requests
 from requests.api import head
+# import BeutifulSoup4
 
 
 class Utils(commands.Cog, name='유틸'):

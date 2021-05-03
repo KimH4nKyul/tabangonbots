@@ -3,7 +3,7 @@ from discord.ext import commands
 from random import choice
 
 
-cog_list = ['기본', '유틸']
+cog_list = ['기본', '유틸', '게임']
 
 
 class Core(commands.Cog, name='기본'):
