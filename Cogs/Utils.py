@@ -59,7 +59,7 @@ class Utils(commands.Cog, name='유틸'):
             await ctx.send("번역할 수 없습니다. ", res.status_code, " 에러 발생!")
             print(res.status_code)
 
-        res.close()
+        # res.close()
 
     @commands.command(name='카카오맵', help="카카오맵으로 장소 검색하기", usage="!타봇 카카오맵 <주소 | 건물명>")
     async def KakaoMap(self, ctx, *address):
