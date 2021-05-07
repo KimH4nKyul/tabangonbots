@@ -17,7 +17,6 @@ twitchID = 'tattoob0y'
 # twitchID = 'hanseoryeong'
 msg = ''
 
-discord.Client()
 client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 
 try:
