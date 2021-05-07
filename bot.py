@@ -13,11 +13,11 @@ twitch_Client_secret = os.environ.get('twitchsecret')
 discord_Token = os.environ.get('token')
 discord_channelID = os.environ.get('channel')
 discord_bot_state = '티배깅 존나'
-twitchID = 'tattoob0y'
+twitchID = 'flowervin'
 # twitchID = 'hanseoryeong'
 msg = ''
 
-# client = discord.Client()
+discord.Client()
 client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 
 try:
