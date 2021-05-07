@@ -13,7 +13,7 @@ twitch_Client_secret = os.environ.get('twitchsecret')
 discord_Token = os.environ.get('token')
 discord_channelID = os.environ.get('channel') # 825793305983582298
 discord_bot_state = '티배깅 존나'
-twitchID = 'flowervin'
+twitchID = 'tattoob0y'
 # twitchID = 'hanseoryeong'
 msg = ''
 
