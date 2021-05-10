@@ -10,6 +10,13 @@ class Game(commands.Cog, name='게임'):
 
     @commands.command(name='로또', help="로또 번호 생성기 ", usage="!타봇 로또")
     async def Lotto(self, ctx):
+
+        lotto_num = []
+        for x in range(1,6):
+            lottoe_num.append(random.range(1, 45+1))
+
+        print(lotto_num)
+
         await ctx.send("제작중")
 
     @commands.command(name='가위바위보', help="가위 바위 보 ", usage="!타봇 가위바위보")
