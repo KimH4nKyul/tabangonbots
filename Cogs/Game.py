@@ -17,7 +17,7 @@ class Game(commands.Cog, name='게임'):
 
         print(lotto_num)
 
-        await ctx.send("제작중")
+        await ctx.send(lotto_num)
 
     @commands.command(name='가위바위보', help="가위 바위 보 ", usage="!타봇 가위바위보")
     async def GBB(self, ctx):
