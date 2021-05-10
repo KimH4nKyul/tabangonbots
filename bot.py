@@ -53,10 +53,10 @@ async def reload_commands(ctx, extension=None):
 @client.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send("그딴 명령어는 없네요 ㅖ~")
+        await ctx.send("그런 명령어는 없습니다. ")
         return
     elif isinstance(error, commands.MissingRequiredArgument) or isinstance(error, commands.BadArgument):
-        await ctx.send("그딴 명령어는 못써요 ㅖ~")
+        await ctx.send("명령어 인자가 부족합니다. ")
     else:
         embed = discord.Embed(
             title="Error", description="Reporting error", color=0xFF0000)
