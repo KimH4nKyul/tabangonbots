@@ -11,11 +11,15 @@ class Game(commands.Cog, name='게임'):
 
     @commands.command(name='로또', help="로또 번호 생성기 ", usage="!타봇 로또")
     async def Lotto(self, ctx):
-
-        lotto_num = []
-        for x in range(1, 7):
-            if x not in lotto_num:
-                lotto_num.append(randrange(1, 46))
+        
+        lotto_num = set()
+        for x in range(1,7):
+            rand_num = random.randrange(1,46)
+            if rand_num not in lotto_num:
+                lotto_num.add(rand_num)
+            
+        lotto_num = list(lotto_num)
+        lotto_num.sort()
 
         await ctx.send(lotto_num)
 
