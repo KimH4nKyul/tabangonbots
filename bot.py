@@ -36,7 +36,7 @@ async def reload_commands(ctx, extension=None):
                 try:
                     client.unload_extension(f"Cogs.{filename[:-3]}")
                     client.load_extension(f"Cogs.{filename[:-3]}")
-                    await ctx.send(":white_check_mark: 모든 명령어를 다시 불러왔습니다.")
+                    await ctx.send(f":white_check_mark: {filename[:-3]} 명령어를 다시 불러왔습니다.")
                 except Exception as e:
                     fmt = f"{type(e).__name__}: {e}"
                     print("\nReload Error: \n", fmt)
