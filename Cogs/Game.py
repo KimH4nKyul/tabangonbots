@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from random import randrange
 from random import choice
 
 
@@ -12,10 +13,8 @@ class Game(commands.Cog, name='게임'):
     async def Lotto(self, ctx):
 
         lotto_num = []
-        for x in range(1,6):
-            lottoe_num.append(random.range(1, 45+1))
-
-        print(lotto_num)
+        for x in range(1, 7):
+            lotto_num.append(randrange(1, 46))
 
         await ctx.send(lotto_num)
 
