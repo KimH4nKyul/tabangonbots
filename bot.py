@@ -11,7 +11,7 @@ from json import loads
 twitch_Client_ID = os.environ.get('twitchid')
 twitch_Client_secret = os.environ.get('twitchsecret')
 discord_Token = os.environ.get('token')
-discord_channelID = os.environ.get('channel') # 825793305983582298
+discord_channelID = 838031527165034496 # os.environ.get('channel') # 825793305983582298
 discord_bot_state = '티배깅 존나'
 twitchID = 'tattoob0y'
 # twitchID = 'hanseoryeong'
