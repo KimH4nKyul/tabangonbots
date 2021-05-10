@@ -14,7 +14,7 @@ class Game(commands.Cog, name='게임'):
         
         lotto_num = set()
         for x in range(1,7):
-            rand_num = random.randrange(1,46)
+            rand_num = randrange(1,46)
             if rand_num not in lotto_num:
                 lotto_num.add(rand_num)
             
