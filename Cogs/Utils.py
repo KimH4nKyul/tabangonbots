@@ -80,7 +80,7 @@ class Utils(commands.Cog, name='유틸'):
 
         if r.status_code == 200:
             if len(r.json()["documents"]) < 1:
-                await ctx.send("\n주소 검색 결과가 없어요 ㅠㅠ! 키워드로 검색해드릴게요~\n")
+                await ctx.send("\n주소 검색 결과가 없습니다. 건물명으로 검색해드리겠습니다. \n")
                 url = 'https://dapi.kakao.com/v2/local/search/keyword.json?query=' + mAddress
                 r = requests.get(url, headers=header)
                 if len(r.json()["documents"]) < 1:
