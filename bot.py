@@ -11,8 +11,8 @@ from json import loads
 twitch_Client_ID = os.environ.get('twitchid')
 twitch_Client_secret = os.environ.get('twitchsecret')
 discord_Token = os.environ.get('token')
-discord_channelID = 838031527165034496 # os.environ.get('channel') # 825793305983582298
-discord_bot_state = '티배깅 존나'
+discord_channelID = os.environ.get('channel')
+discord_bot_state = ''
 twitchID = 'tattoob0y'
 # twitchID = 'hanseoryeong'
 msg = ''
@@ -54,7 +54,7 @@ async def reload_commands(ctx, extension=None):
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("그런 명령어는 없습니다. ")
-        return
+        # return
     elif isinstance(error, commands.MissingRequiredArgument) or isinstance(error, commands.BadArgument):
         await ctx.send("명령어 인자가 부족합니다. ")
     else:
