@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from random import choice
 
 
 cog_list = ['기본', '유틸', '게임']
@@ -14,8 +13,7 @@ class Core(commands.Cog, name='기본'):
     @commands.command(name='안녕', help="타봇이랑 인사해요. ", usage="!타봇 안녕")
     async def Hello(self, ctx):
 
-        cmt = ["싸대기 탁! 야추 탁! 야꼭지 탁!", "응 싸대기 쳐맞어 그냥 쳐맞어 존나 쳐맞어"]
-        await ctx.send(f"{ctx.author.name}님 안녕하세요? " + choice(cmt))
+        await ctx.send(f"{ctx.author.name}님 안녕하세요?")
 
     @commands.command(name='도움말', help="타봇 카테고리별 명령어 가이드를 보여줘요.", usage="!타봇 도움말 <command>")
     async def Help(self, ctx, func=None):
@@ -60,7 +58,7 @@ class Core(commands.Cog, name='기본'):
                         [c.name for c in command_list]))  # 명령어 리스트 join
                     await ctx.send(embed=embed)  # 보내기
                 else:
-                    await ctx.send("없어")
+                    await ctx.send("명령어를 찾을 수 없습니다. ")
 
 
 def setup(client):
