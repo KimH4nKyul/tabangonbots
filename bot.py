@@ -88,7 +88,8 @@ async def on_ready():
 
     check = False
 
-    while client.is_ready:
+    # while client.is_ready:
+    while True:
         print("ready on Notification")
         headers = {'client-id': twitch_Client_ID,
                    'Authorization': authorization}
