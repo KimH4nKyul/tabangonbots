@@ -10,11 +10,6 @@ class Core(commands.Cog, name='기본'):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name='안녕', help="타봇이랑 인사해요. ", usage="!타봇 안녕")
-    async def Hello(self, ctx):
-
-        await ctx.send(f"{ctx.author.name}님 안녕하세요?")
-
     @commands.command(name='도움말', help="타봇 카테고리별 명령어 가이드를 보여줘요.", usage="!타봇 도움말 <command>")
     async def Help(self, ctx, func=None):
 
