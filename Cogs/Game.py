@@ -9,17 +9,30 @@ class Game(commands.Cog, name='게임'):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(name='로또', help="로또 번호 생성기(보너스 번호 포함 7개 출력) ", usage="!타봇 로또")
-    async def Lotto(self, ctx):
-        
+    def makeLotto(): 
+            
         lotto_num = set()
         for x in range(1,8):
             rand_num = randrange(1,46)
             if rand_num not in lotto_num:
                 lotto_num.add(rand_num)
-            
+        lotto_len = len(lotto_num)
+        
+        # print(lotto_len == 7)
+        if not(lotto_len == 7):
+            # print("Checked")
+            lotto_num = Game.makeLotto()
+
         lotto_num = list(lotto_num)
         lotto_num.sort()
+
+
+        return lotto_num
+
+    @commands.command(name='로또', help="로또 번호 생성기(보너스 번호 포함 7개 출력) ", usage="!타봇 로또")
+    async def Lotto(self, ctx):
+
+        lotto_num = Game.makeLotto()
 
         await ctx.send(lotto_num)
 
