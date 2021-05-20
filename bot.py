@@ -14,7 +14,7 @@ discord_Token = os.environ.get('token')
 discord_channelID = os.environ.get('channel')
 discord_bot_state = ''
 twitchID = 'tattoob0y'
-# twitchID = 'hanseoryeong'
+# twitchID = 'dogswellfish'
 msg = ''
 
 client = commands.Bot(command_prefix='!타봇 ', help_command=None)
@@ -95,6 +95,7 @@ async def on_ready():
                    'Authorization': authorization}
 
         response_channel = requests.get(
+            #'https://api.twitch.tv/helix/search/channels?query=' + twitchID, headers=headers)
             'https://api.twitch.tv/helix/streams?user_login=' + twitchID, headers=headers)
         print("server: ", response_channel.text)
 
@@ -102,8 +103,8 @@ async def on_ready():
             if loads(response_channel.text)['data'][0]['type'] == 'live' and check == False:
                 # await client.wait_until_ready()
                 msg = time.strftime('%Y-%m-%d', time.localtime(
-                    time.time())) + '\n타뱅온! 방송보러가기 : https://www.twitch.tv/' + 'dogswellfish'
-                await channel.send("\n 테스트 메시지 입니다. ")
+                    time.time())) + '\n타뱅온! 방송보러가기 : https://www.twitch.tv/' + twitchID
+                await channel.send(msg)
                 print("Online")
                 check = True
         except:
