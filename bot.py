@@ -14,7 +14,6 @@ discord_Token = os.environ.get('token')
 discord_channelID = os.environ.get('channel')
 discord_bot_state = ''
 twitchID = 'tattoob0y'
-# twitchID = 'dogswellfish'
 msg = ''
 
 client = commands.Bot(command_prefix='!타봇 ', help_command=None)
@@ -26,6 +25,10 @@ try:
 except Exception as e:
     fmt = f"{type(e).__name__}: {e}"
     print("\nReload Error: \n", fmt)
+
+
+def mPrintError(err):
+    print("[ERROR]>>", err)
 
 
 @client.command(name="리로드")
@@ -64,6 +67,25 @@ async def on_command_error(ctx, error):
         await ctx.send("잘못된 명령어 사용법입니다. \n", embed=embed)
 
 
+def mTwitchOauth2(id, secret):
+
+    key = ''
+    try:
+        key = requests.post("https://id.twitch.tv/oauth2/token?client_id=" + id +
+                            "&client_secret=" + secret + "&grant_type=client_credentials")
+    except requests.exceptions.Timeout as te:
+        mPrintError(te)
+    except requests.exceptions.ConnectionError as ce:
+        mPrintError(ce)
+    except requests.exceptions.HTTPError as he:
+        mPrintError(he)
+    # Any Error except upper exception
+    except requests.exceptions.RequestException as re:
+        mPrintError(re)
+
+    return key
+
+
 @client.event
 async def on_ready():
 
@@ -79,8 +101,7 @@ async def on_ready():
     print(channel)
 
     # 트위치 api 2차인증
-    oauth_key = requests.post("https://id.twitch.tv/oauth2/token?client_id=" + twitch_Client_ID +
-                              "&client_secret=" + twitch_Client_secret + "&grant_type=client_credentials")
+    oauth_key = mTwitchOauth2(twitch_Client_ID, twitch_Client_secret)
     access_token = loads(oauth_key.text)["access_token"]
     token_type = 'Bearer '
     authorization = token_type + access_token
@@ -94,12 +115,12 @@ async def on_ready():
         headers = {'client-id': twitch_Client_ID,
                    'Authorization': authorization}
 
-        response_channel = requests.get(
-            #'https://api.twitch.tv/helix/search/channels?query=' + twitchID, headers=headers)
-            'https://api.twitch.tv/helix/streams?user_login=' + twitchID, headers=headers)
-        print("server: ", response_channel.text)
-
         try:
+            response_channel = requests.get(
+                # 'https://api.twitch.tv/helix/search/channels?query=' + twitchID, headers=headers)
+                'https://api.twitch.tv/helix/streams?user_login=' + twitchID, headers=headers)
+            print("server: ", response_channel.text)
+
             if loads(response_channel.text)['data'][0]['type'] == 'live' and check == False:
                 # await client.wait_until_ready()
                 msg = time.strftime('%Y-%m-%d', time.localtime(
@@ -115,6 +136,6 @@ async def on_ready():
             print("Offline")
             # time.sleep(3600) # 1hours
 
-        await asyncio.sleep(30)
+        await asyncio.sleep(120)
 
 client.run(discord_Token)
