@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import discord
 from discord.ext import commands
-# import traceback
 import requests
 import asyncio
 import time
@@ -18,17 +17,18 @@ msg = ''
 
 client = commands.Bot(command_prefix='!타봇 ', help_command=None)
 
+
+def mPrintError(err):
+    print("[ERROR]>>", err)
+
+
 try:
     for filename in os.listdir("Cogs"):
         if filename.endswith(".py"):
             client.load_extension(f'Cogs.{filename[:-3]}')
 except Exception as e:
     fmt = f"{type(e).__name__}: {e}"
-    print("\nReload Error: \n", fmt)
-
-
-def mPrintError(err):
-    print("[ERROR]>>", err)
+    mPrintError(fmt)
 
 
 @client.command(name="리로드")
@@ -122,7 +122,6 @@ async def on_ready():
             print("server: ", response_channel.text)
 
             if loads(response_channel.text)['data'][0]['type'] == 'live' and check == False:
-                # await client.wait_until_ready()
                 msg = time.strftime('%Y-%m-%d', time.localtime(
                     time.time())) + '\n타뱅온! 방송보러가기 : https://www.twitch.tv/' + twitchID
                 await channel.send(msg)
@@ -132,9 +131,7 @@ async def on_ready():
             check = False
             # msg = '현재는 방송 중이 아닙니다! '
             # await channel.send(msg)
-            # await client.wait_until_ready()
             print("Offline")
-            # time.sleep(3600) # 1hours
 
         await asyncio.sleep(120)
 
