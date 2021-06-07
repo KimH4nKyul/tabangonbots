@@ -9,6 +9,9 @@ class Game(commands.Cog, name='게임'):
     def __init__(self, client):
         self.client = client
 
+    def rockPaperScissors():
+        pass
+
     def makeLotto(): 
             
         lotto_num = set()
@@ -36,8 +39,9 @@ class Game(commands.Cog, name='게임'):
 
         await ctx.send(lotto_num)
 
-    @commands.command(name='가위바위보', help="가위 바위 보 ", usage="!타봇 가위바위보")
+    @commands.command(name='가위바위보', help="가위 바위 보 ", usage="!타봇 가위바위보 <가위|바위|보>")
     async def GBB(self, ctx):
+        Game.rockPaperScissors()
         await ctx.send("제작중")
 
     @commands.command(name='사다리', help="사다리 타기 ", usage="!타봇 사다리")
